@@ -8,9 +8,9 @@ describe('UploadCsvComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UploadCsvComponent ]
+      declarations: [UploadCsvComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(UploadCsvComponent);
     component = fixture.componentInstance;

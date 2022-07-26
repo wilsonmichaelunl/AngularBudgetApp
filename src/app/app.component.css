@@ -1,0 +1,15 @@
+.main-content {
+  /*  display: flex; */
+  text-align: center;
+  justify-content: center;
+}
+
+mat-sidenav-content {
+  display: flex;
+  justify-content: center;
+}
+
+mat-sidenav {
+  width: 241px;
+}
+

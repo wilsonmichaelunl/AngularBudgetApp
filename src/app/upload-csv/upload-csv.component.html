@@ -1,1 +1,34 @@
-<p>upload-csv works!</p>
+<mat-form-field appearance="fill">
+  <mat-label>Choose a bank</mat-label>
+  <mat-select [(ngModel)]="selectedBank">
+    <mat-option *ngFor="let bank of banks" [value]="bank.BankId">
+      {{bank.BankName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div>
+  <mat-form-field>
+    <mat-toolbar>
+      <input matInput [(ngModel)]="fileAttr" readonly name="name"/>
+      <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="selectedBank == null">Upload
+        File
+      </button>
+    </mat-toolbar>
+  </mat-form-field>
+
+  <input
+    hidden
+    (change)="onFileSelected($event)"
+    type="file"
+    #fileInput
+    id="uploadFile"
+    name="uploadFile"
+    accept="text/csv"
+  />
+</div>
+
+<app-table *ngIf="dataSource" [dataSource]="dataSource"></app-table>
+
+
+

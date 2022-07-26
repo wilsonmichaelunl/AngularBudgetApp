@@ -1,1 +1,57 @@
-<p>purchase-dialog works!</p>
+<h2 mat-dialog-title>{{ description }}</h2>
+<h2 mat-dialog-title>{{ purchaseDateString }}</h2>
+<h2 mat-dialog-title>{{ amount | currency }}</h2>
+
+<form [formGroup]="expenseForm" (submit)="save()">
+  <div formArrayName="expenses">
+      <div [formGroupName]="i" *ngFor="let expenseCategoryGroup of expenses.controls; let i=index">
+        <mat-form-field>
+          <mat-label attr.for="{{'bucket'+i}}">Expense Category</mat-label>
+          <mat-select id="{{'bucket'+i}}" formControlName="bucket">
+            <mat-optgroup *ngFor="let group of expenseCategoryGroups" [label]="group.GroupName">
+              <mat-option *ngFor="let category of group.ExpenseCategories" [value]="category.MinorCategory">
+                {{category.MinorCategory}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label attr.for="{{'expenseDate'+i}}">Expense Date</mat-label>
+          <input id="{{'expenseDate'+i}}" matInput [matDatepicker]="picker" formControlName="expenseDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker [startAt]="purchaseDate"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label attr.for="{{'amount'+i}}">Amount</mat-label>
+          <input matInput id="{{'amount'+i}}" type="number" formControlName="amount" (change)="getRunningTotal()">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label attr.for="{{'description'+i}}">Description</mat-label>
+          <input matInput id="{{'description'+i}}" type="text" formControlName="description">
+        </mat-form-field>
+
+        <button mat-mini-fab color="warn" matTooltip="Delete the row" [disabled]="getExpenseRowCount() < 2"
+          (click)="deleteRow(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+  </div>
+  <div>
+    <button mat-mini-fab color="primary" matTooltip="Add row" (click)="addRow()" [disabled]="!this.expenseForm.valid">
+      <mat-icon >add</mat-icon>
+    </button>
+  </div>
+  <div class="submit-button">
+    <div>Total Amount: {{totalAmount | currency}}</div>
+    <button mat-raised-button color="primary" [disabled]="!this.expenseForm.valid" layout-align="end"
+      type="submit">
+      Submit
+    </button>
+  </div>
+</form>
+
+

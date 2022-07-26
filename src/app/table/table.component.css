@@ -1,0 +1,18 @@
+table {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table .mat-header-cell {
+  text-align: center;
+}
+
+button {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.disabled-row {
+  background-color: lightgray;
+}

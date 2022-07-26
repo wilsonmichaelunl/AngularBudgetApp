@@ -1,0 +1,13 @@
+mat-form-field {
+  padding: 12px
+}
+
+.submit-button {
+  justify-content: flex-end;
+  display: flex;
+}
+
+.submit-button div {
+  padding-right: 12px;
+}
+
