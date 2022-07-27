@@ -3,6 +3,9 @@ FROM node:latest as node
 WORKDIR /app
 COPY . .
 RUN npm install
+
+ENV GENERATE_SOURCEMAP false
+
 RUN npm run build --prod
 #stage 2
 FROM nginx:alpine
